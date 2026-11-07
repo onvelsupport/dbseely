@@ -1,0 +1,1 @@
+web: gunicorn dbseely_project.wsgi:application

@@ -1,0 +1,49 @@
+{% extends "store/base.html" %}
+
+{% block title %}Application Received | DBSEELY{% endblock %}
+
+{% block content %}
+
+<div class="page-shell">
+
+    <div class="nav">
+        <div class="logo">DBSEELY</div>
+        <div class="badge">Application Received</div>
+    </div>
+
+    <main class="hero">
+        <section>
+            <span class="pill">Thank you</span>
+
+            <h1>Your application has been received.</h1>
+
+            <p>
+                Thank you for applying to DBSEELY. Your details have been
+                submitted for review. If your application is eligible for a
+                reward, we will contact you using the email address you provided.
+            </p>
+
+            <div class="features">
+                <span>Application submitted</span>
+                <span>Review pending</span>
+                <span>Updates by email</span>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>What happens next?</h2>
+
+            <p>
+                We will review your application against the published eligibility
+                requirements. If additional identity verification is needed,
+                we will explain why and direct you to our authorised verification
+                provider. A submitted application is not a confirmation of payment.
+            </p>
+
+            <a href="/" class="submit-btn">Back to Home</a>
+        </section>
+    </main>
+
+</div>
+
+{% endblock %}

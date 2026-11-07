@@ -1,0 +1,135 @@
+{% extends "store/base.html" %}
+
+{% block title %}DBSEELY | Rewards Application{% endblock %}
+
+{% block content %}
+
+<div class="page-shell">
+
+    <div class="nav">
+        <div class="logo">DBSEELY</div>
+        <div class="badge">Rewards Platform</div>
+    </div>
+
+    <div class="hero">
+
+        <div>
+            <span class="pill">Don't Be Silly.</span>
+
+            <h1>Good things start with getting involved.</h1>
+
+            <p>
+                Welcome to DBSEELY. Submit your details to apply for available
+                rewards. Applications are subject to eligibility checks and
+                review; submitting an application does not guarantee a payment.
+            </p>
+
+            <div class="features">
+                <span>Simple online application</span>
+                <span>PayPal email for eligible payouts</span>
+                <span>Clear application updates</span>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Apply for Rewards</h2>
+            <p>Complete the form below to submit your application.</p>
+
+            <form method="post">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="form-errors">{{ form.non_field_errors }}</div>
+                {% endif %}
+
+                <div class="field">
+                    <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                    {{ form.first_name }}
+                    {{ form.first_name.errors }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                    {{ form.last_name }}
+                    {{ form.last_name.errors }}
+                </div>
+
+                <div class="field dob-field">
+                    <label for="{{ form.date_of_birth.id_for_label }}">Date of Birth</label>
+                    {{ form.date_of_birth }}
+                    {{ form.date_of_birth.errors }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.email.id_for_label }}">Email Address</label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                    {{ form.phone }}
+                    {{ form.phone.errors }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.address_line_1.id_for_label }}">Address Line 1</label>
+                    {{ form.address_line_1 }}
+                    {{ form.address_line_1.errors }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.address_line_2.id_for_label }}">Address Line 2 (Optional)</label>
+                    {{ form.address_line_2 }}
+                    {{ form.address_line_2.errors }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.city.id_for_label }}">Town / City</label>
+                    {{ form.city }}
+                    {{ form.city.errors }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.county.id_for_label }}">County (Optional)</label>
+                    {{ form.county }}
+                    {{ form.county.errors }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.postcode.id_for_label }}">Postcode</label>
+                    {{ form.postcode }}
+                    {{ form.postcode.errors }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ form.paypal_email.id_for_label }}">PayPal Email Address</label>
+                    {{ form.paypal_email }}
+                    {{ form.paypal_email.errors }}
+                    <small>Use the email address associated with your PayPal account. Never enter your PayPal password or verification code.</small>
+                </div>
+
+                <div class="checkbox">
+                    {{ form.agree }}
+                    <label for="{{ form.agree.id_for_label }}">{{ form.agree.label }}</label>
+                </div>
+                {{ form.agree.errors }}
+
+                <button type="submit" class="submit-btn">Submit Application</button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        DBSEELY means “Don't Be Silly.” Applications are reviewed under the
+        published eligibility rules.
+    </div>
+
+</div>
+
+{% endblock %}
