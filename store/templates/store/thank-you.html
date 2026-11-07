@@ -1,228 +1,369 @@
-```django
 {% extends "store/base.html" %}
 
-{% block title %}Application Received | DBSEELY{% endblock %}
+{% block title %}Application Confirmed | DBSEELY{% endblock %}
 
 {% block content %}
 
 <style>
-.thankyou-wrapper {
-    min-height: 80vh;
+.thankyou-page {
+    min-height: 100vh;
+    background: #111318;
+    color: white;
+    padding: 30px 7%;
+    font-family: Arial, sans-serif;
+}
+
+.thankyou-nav {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    padding: 50px 20px;
+    padding-bottom: 35px;
+    border-bottom: 1px solid #292c33;
 }
 
-.confirmation-card {
-    background: white;
-    width: 100%;
-    max-width: 620px;
-    padding: 45px;
-    border-radius: 28px;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 20px 60px rgba(0,0,0,.06);
+.thankyou-logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.thankyou-logo span {
+    color: #f47738;
+}
+
+.nav-status {
+    font-size: 11px;
+    color: #a1a1aa;
+    letter-spacing: 1.5px;
+}
+
+.confirmation-container {
+    max-width: 850px;
+    margin: 75px auto;
+}
+
+.confirmation-top {
     text-align: center;
+    margin-bottom: 45px;
 }
 
-.confirmation-icon {
-    width: 76px;
-    height: 76px;
-    background: #ecfdf5;
-    color: #059669;
+.success-icon {
+    width: 90px;
+    height: 90px;
+    background: rgba(244,119,56,.12);
+    border: 1px solid rgba(244,119,56,.4);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 35px;
-    margin: 0 auto 25px;
+    margin: 0 auto 30px;
+    color: #f47738;
+    font-size: 43px;
 }
 
-.confirmation-card h1 {
-    font-size: 36px;
-    letter-spacing: -1.5px;
-    margin-bottom: 15px;
+.confirmation-label {
+    color: #f47738;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
 }
 
-.confirmation-description {
-    color: #64748b;
-    font-size: 16px;
+.confirmation-top h1 {
+    font-size: clamp(38px, 6vw, 65px);
+    letter-spacing: -3px;
+    line-height: 1.05;
+    margin: 18px 0;
+}
+
+.confirmation-top p {
+    color: #9ca3af;
+    font-size: 15px;
     line-height: 1.8;
+    max-width: 540px;
+    margin: auto;
+}
+
+.application-card {
+    background: #1b1e25;
+    border: 1px solid #30333b;
+    border-radius: 18px;
+    padding: 32px;
+    margin-bottom: 22px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 30px;
 }
 
-.status-box {
-    background: #f8fafc;
-    border: 1px solid #e5e7eb;
-    border-radius: 18px;
-    padding: 22px;
-    text-align: left;
-    margin-bottom: 28px;
+.card-header h2 {
+    font-size: 17px;
+    margin: 0;
 }
 
-.status-item {
+.received-tag {
+    background: rgba(16,185,129,.12);
+    color: #34d399;
+    padding: 8px 12px;
+    border-radius: 30px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.progress-track {
     display: flex;
-    align-items: center;
-    gap: 13px;
-    margin-bottom: 18px;
+    align-items: flex-start;
+    position: relative;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-.status-item:last-child {
-    margin-bottom: 0;
+.progress-track:before {
+    content: "";
+    position: absolute;
+    top: 16px;
+    left: 9%;
+    right: 9%;
+    height: 2px;
+    background: #3b3e46;
 }
 
-.status-dot {
-    width: 11px;
-    height: 11px;
-    background: #10b981;
+.progress-step {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    text-align: center;
+}
+
+.step-circle {
+    width: 34px;
+    height: 34px;
     border-radius: 50%;
-    flex-shrink: 0;
+    background: #30333b;
+    color: #a1a1aa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 13px;
+    font-size: 13px;
+    font-weight: 800;
 }
 
-.status-dot.pending {
-    background: #f59e0b;
+.step-circle.complete {
+    background: #f47738;
+    color: white;
 }
 
-.status-text strong {
-    display: block;
-    font-size: 14px;
-    color: #111827;
-}
-
-.status-text small {
-    color: #64748b;
+.step-title {
     font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 7px;
 }
 
-.verification-section {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    padding: 25px;
+.step-description {
+    font-size: 10px;
+    color: #858a96;
+    line-height: 1.5;
+}
+
+.verification-card {
+    background: linear-gradient(135deg, #27201c, #1d1e24);
+    border: 1px solid rgba(244,119,56,.3);
+    border-radius: 18px;
+    padding: 32px;
+    margin-bottom: 22px;
+}
+
+.verification-label {
+    color: #f47738;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.verification-card h2 {
+    font-size: 25px;
+    letter-spacing: -1px;
+    margin: 13px 0;
+}
+
+.verification-card p {
+    color: #a1a1aa;
+    font-size: 13px;
+    line-height: 1.8;
+    max-width: 550px;
     margin-bottom: 25px;
-    text-align: left;
-}
-
-.verification-section h2 {
-    font-size: 21px;
-    margin-bottom: 10px;
-}
-
-.verification-section p {
-    font-size: 14px;
-    color: #64748b;
-    line-height: 1.7;
-    margin-bottom: 20px;
 }
 
 .verify-button {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width: 100%;
-    min-height: 58px;
-    border-radius: 14px;
-    background: #111827;
+    min-height: 55px;
+    background: #f47738;
     color: white;
     text-decoration: none;
-    font-size: 15px;
+    border-radius: 9px;
+    font-size: 13px;
     font-weight: 800;
     transition: .2s;
 }
 
 .verify-button:hover {
-    background: #263449;
+    background: #dc632a;
     transform: translateY(-2px);
 }
 
-.back-link {
-    display: inline-block;
-    color: #64748b;
-    font-size: 14px;
-    text-decoration: none;
-    margin-top: 5px;
-}
-
-.back-link:hover {
-    color: #111827;
-}
-
 .security-note {
-    font-size: 12px;
-    color: #94a3b8;
-    line-height: 1.6;
-    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    color: #858a96;
+    font-size: 11px;
+    line-height: 1.7;
+    padding: 20px 5px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #292c33;
+    padding-top: 25px;
+    margin-top: 40px;
+    color: #777d89;
+    font-size: 11px;
+}
+
+.footer-links a {
+    color: #f47738;
+    text-decoration: none;
 }
 
 @media(max-width:600px) {
-    .confirmation-card {
-        padding: 28px 20px;
-        border-radius: 22px;
+    .thankyou-page {
+        padding: 22px 17px;
     }
 
-    .confirmation-card h1 {
-        font-size: 29px;
+    .confirmation-container {
+        margin: 55px auto;
     }
 
-    .thankyou-wrapper {
-        padding: 25px 10px;
+    .application-card,
+    .verification-card {
+        padding: 23px 17px;
+    }
+
+    .step-title {
+        font-size: 10px;
+    }
+
+    .step-description {
+        font-size: 9px;
+    }
+
+    .confirmation-top h1 {
+        letter-spacing: -2px;
+    }
+
+    .nav-status {
+        font-size: 9px;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 15px;
     }
 }
 </style>
 
-<div class="thankyou-wrapper">
+<div class="thankyou-page">
 
-    <div class="confirmation-card">
-
-        <div class="confirmation-icon">
-            ✓
+    <nav class="thankyou-nav">
+        <div class="thankyou-logo">
+            DBSEELY<span>.</span>
         </div>
 
-        <h1>Application received.</h1>
-
-        <p class="confirmation-description">
-            Thank you for applying to DBSEELY.
-            Your application has been successfully submitted.
-            Please complete the identity verification step
-            if it is required for your application.
-        </p>
-
-        <div class="status-box">
-
-            <div class="status-item">
-                <div class="status-dot"></div>
-                <div class="status-text">
-                    <strong>Application submitted</strong>
-                    <small>Your details have been received.</small>
-                </div>
-            </div>
-
-            <div class="status-item">
-                <div class="status-dot pending"></div>
-                <div class="status-text">
-                    <strong>Identity verification</strong>
-                    <small>Pending completion, if required.</small>
-                </div>
-            </div>
-
-            <div class="status-item">
-                <div class="status-dot pending"></div>
-                <div class="status-text">
-                    <strong>Application review</strong>
-                    <small>Eligibility and reward approval.</small>
-                </div>
-            </div>
-
+        <div class="nav-status">
+            APPLICATION PORTAL / 2026
         </div>
+    </nav>
 
-        <div class="verification-section">
+    <main class="confirmation-container">
 
-            <h2>Verify your identity</h2>
+        <section class="confirmation-top">
+
+            <div class="success-icon">✓</div>
+
+            <div class="confirmation-label">
+                SUBMISSION SUCCESSFUL
+            </div>
+
+            <h1>You're on the list.</h1>
 
             <p>
-                If identity verification is required, use our
-                authorised verification provider to complete
-                the process securely.
+                Your application has been received.
+                Thank you for taking the time to apply to DBSEELY.
+                Your application will be subject to eligibility
+                checks and review.
+            </p>
+
+        </section>
+
+        <section class="application-card">
+
+            <div class="card-header">
+                <h2>Application progress</h2>
+                <span class="received-tag">RECEIVED</span>
+            </div>
+
+            <div class="progress-track">
+
+                <div class="progress-step">
+                    <div class="step-circle complete">✓</div>
+                    <div class="step-title">Submitted</div>
+                    <div class="step-description">
+                        Details received
+                    </div>
+                </div>
+
+                <div class="progress-step">
+                    <div class="step-circle">02</div>
+                    <div class="step-title">Verification</div>
+                    <div class="step-description">
+                        If required
+                    </div>
+                </div>
+
+                <div class="progress-step">
+                    <div class="step-circle">03</div>
+                    <div class="step-title">Review</div>
+                    <div class="step-description">
+                        Eligibility checks
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="verification-card">
+
+            <div class="verification-label">
+                NEXT STEP / IDENTITY
+            </div>
+
+            <h2>Complete identity verification.</h2>
+
+            <p>
+                If your application requires identity verification,
+                you can use our authorised verification provider
+                to complete the process. Follow the provider's
+                instructions and never share your account passwords
+                or one-time verification codes.
             </p>
 
             <a
@@ -231,25 +372,27 @@
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                Verify Identity →
+                Continue to Verification →
             </a>
 
+        </section>
+
+        <div class="security-note">
+            <span>ⓘ</span>
+            <span>
+                Your application and any verification are subject
+                to DBSEELY's eligibility and review procedures.
+                Submission does not guarantee approval or payment.
+            </span>
         </div>
 
-        <a href="/" class="back-link">
-            ← Back to DBSEELY homepage
-        </a>
+        <div class="footer-links">
+            <span>© 2026 DBSEELY. Don't Be Silly.</span>
+            <a href="/">Return to homepage →</a>
+        </div>
 
-        <p class="security-note">
-            DBSEELY · Don't Be Silly.
-            <br>
-            Submitting an application or completing verification
-            does not guarantee a reward or payment.
-        </p>
-
-    </div>
+    </main>
 
 </div>
 
 {% endblock %}
-```

@@ -4,38 +4,335 @@
 
 {% block content %}
 
-<div class="page-shell">
+<style>
+    .dbseely-page {
+        min-height: 100vh;
+        background: #f4f5f7;
+        padding: 35px 7%;
+        color: #151515;
+        font-family: Arial, sans-serif;
+    }
 
-    <div class="nav">
-        <div class="logo">DBSEELY</div>
-        <div class="badge">Rewards Platform</div>
-    </div>
+    .dbseely-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 65px;
+    }
 
-    <div class="hero">
+    .dbseely-logo {
+        font-size: 27px;
+        font-weight: 900;
+        letter-spacing: 3px;
+    }
 
-        <div>
-            <span class="pill">Don't Be Silly.</span>
+    .nav-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #777;
+        letter-spacing: 1px;
+    }
 
-            <h1>Good things start with getting involved.</h1>
+    .dbseely-main {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 70px;
+        max-width: 1250px;
+        margin: auto;
+        align-items: start;
+    }
+
+    .intro {
+        padding-top: 55px;
+        position: sticky;
+        top: 30px;
+    }
+
+    .intro-tag {
+        display: inline-block;
+        background: #fff0e8;
+        color: #ed6b2d;
+        padding: 10px 16px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 25px;
+    }
+
+    .intro h1 {
+        font-size: clamp(40px, 5vw, 65px);
+        line-height: 1.05;
+        letter-spacing: -3px;
+        margin: 0 0 25px;
+        font-weight: 800;
+    }
+
+    .intro h1 span {
+        color: #ed6b2d;
+    }
+
+    .intro p {
+        color: #777;
+        line-height: 1.8;
+        font-size: 15px;
+        max-width: 430px;
+    }
+
+    .intro-points {
+        margin-top: 40px;
+        display: grid;
+        gap: 20px;
+    }
+
+    .intro-point {
+        display: flex;
+        gap: 13px;
+        align-items: center;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .point-icon {
+        width: 35px;
+        height: 35px;
+        background: white;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        color: #ed6b2d;
+    }
+
+    .form-panel {
+        background: white;
+        padding: 38px;
+        border-radius: 18px;
+        box-shadow: 0 15px 55px rgba(0,0,0,.045);
+    }
+
+    .form-heading {
+        margin-bottom: 30px;
+    }
+
+    .form-heading small {
+        color: #ed6b2d;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 2px;
+    }
+
+    .form-heading h2 {
+        font-size: 27px;
+        margin: 10px 0;
+        letter-spacing: -1px;
+    }
+
+    .form-heading p {
+        color: #888;
+        font-size: 13px;
+    }
+
+    .section-heading {
+        font-size: 12px;
+        font-weight: 800;
+        color: #333;
+        letter-spacing: 1px;
+        margin: 30px 0 17px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+    }
+
+    .field {
+        margin-bottom: 17px;
+    }
+
+    .field label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 9px;
+        color: #444;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid #e5e5e5;
+        background: #fafafa;
+        border-radius: 8px;
+        outline: none;
+        font-size: 13px;
+        box-sizing: border-box;
+        transition: .2s;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+        border-color: #ed6b2d;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(237,107,45,.08);
+    }
+
+    .field small {
+        display: block;
+        color: #999;
+        font-size: 11px;
+        line-height: 1.6;
+        margin-top: 8px;
+    }
+
+    .checkbox {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        margin: 25px 0;
+        font-size: 12px;
+        line-height: 1.6;
+        color: #666;
+    }
+
+    .checkbox input {
+        margin-top: 3px;
+        accent-color: #ed6b2d;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 17px;
+        background: #ed6b2d;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: .25s;
+    }
+
+    .submit-btn:hover {
+        background: #d9571c;
+        transform: translateY(-2px);
+    }
+
+    .form-errors,
+    .field ul.errorlist,
+    .checkbox ~ ul.errorlist {
+        color: #d93025;
+        font-size: 12px;
+        list-style: none;
+        padding: 0;
+        margin: 5px 0;
+    }
+
+    .dbseely-footer {
+        text-align: center;
+        margin-top: 65px;
+        padding: 25px;
+        color: #999;
+        font-size: 11px;
+    }
+
+    @media(max-width: 900px) {
+        .dbseely-main {
+            grid-template-columns: 1fr;
+            gap: 35px;
+        }
+
+        .intro {
+            position: static;
+            padding-top: 0;
+        }
+
+        .intro h1 {
+            font-size: 45px;
+        }
+
+        .dbseely-nav {
+            margin-bottom: 40px;
+        }
+    }
+
+    @media(max-width: 550px) {
+        .dbseely-page {
+            padding: 25px 18px;
+        }
+
+        .form-panel {
+            padding: 23px 18px;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        .intro h1 {
+            font-size: 39px;
+        }
+
+        .nav-label {
+            font-size: 10px;
+        }
+    }
+</style>
+
+<div class="dbseely-page">
+
+    <nav class="dbseely-nav">
+        <div class="dbseely-logo">DBSEELY<span style="color:#ed6b2d">.</span></div>
+        <div class="nav-label">REWARDS PLATFORM</div>
+    </nav>
+
+    <main class="dbseely-main">
+
+        <section class="intro">
+
+            <div class="intro-tag">DON'T BE SILLY.</div>
+
+            <h1>
+                Your next reward starts <span>here.</span>
+            </h1>
 
             <p>
-                Welcome to DBSEELY. Submit your details to apply for available
-                rewards. Applications are subject to eligibility checks and
-                review; submitting an application does not guarantee a payment.
+                Welcome to DBSEELY. Complete your application to be considered
+                for available rewards. Every application is subject to
+                eligibility checks and review.
             </p>
 
-            <div class="features">
-                <span>Simple online application</span>
-                <span>PayPal email for eligible payouts</span>
-                <span>Clear application updates</span>
+            <div class="intro-points">
+                <div class="intro-point">
+                    <div class="point-icon">01</div>
+                    Simple online application
+                </div>
+
+                <div class="intro-point">
+                    <div class="point-icon">02</div>
+                    Secure submission of your details
+                </div>
+
+                <div class="intro-point">
+                    <div class="point-icon">03</div>
+                    Application review and updates
+                </div>
             </div>
 
-        </div>
+        </section>
 
-        <div class="card">
+        <section class="form-panel">
 
-            <h2>Apply for Rewards</h2>
-            <p>Complete the form below to submit your application.</p>
+            <div class="form-heading">
+                <small>APPLICATION FORM / 2026</small>
+                <h2>Apply for Rewards</h2>
+                <p>Enter your information accurately to complete your application.</p>
+            </div>
 
             <form method="post">
                 {% csrf_token %}
@@ -44,22 +341,34 @@
                     <div class="form-errors">{{ form.non_field_errors }}</div>
                 {% endif %}
 
-                <div class="field">
-                    <label for="{{ form.first_name.id_for_label }}">First Name</label>
-                    {{ form.first_name }}
-                    {{ form.first_name.errors }}
+                <div class="section-heading">01 — PERSONAL INFORMATION</div>
+
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                        {{ form.first_name }}
+                        {{ form.first_name.errors }}
+                    </div>
+
+                    <div class="field">
+                        <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                        {{ form.last_name }}
+                        {{ form.last_name.errors }}
+                    </div>
                 </div>
 
-                <div class="field">
-                    <label for="{{ form.last_name.id_for_label }}">Last Name</label>
-                    {{ form.last_name }}
-                    {{ form.last_name.errors }}
-                </div>
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="{{ form.date_of_birth.id_for_label }}">Date of Birth</label>
+                        {{ form.date_of_birth }}
+                        {{ form.date_of_birth.errors }}
+                    </div>
 
-                <div class="field dob-field">
-                    <label for="{{ form.date_of_birth.id_for_label }}">Date of Birth</label>
-                    {{ form.date_of_birth }}
-                    {{ form.date_of_birth.errors }}
+                    <div class="field">
+                        <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                        {{ form.phone }}
+                        {{ form.phone.errors }}
+                    </div>
                 </div>
 
                 <div class="field">
@@ -68,11 +377,7 @@
                     {{ form.email.errors }}
                 </div>
 
-                <div class="field">
-                    <label for="{{ form.phone.id_for_label }}">Phone Number</label>
-                    {{ form.phone }}
-                    {{ form.phone.errors }}
-                </div>
+                <div class="section-heading">02 — ADDRESS DETAILS</div>
 
                 <div class="field">
                     <label for="{{ form.address_line_1.id_for_label }}">Address Line 1</label>
@@ -86,16 +391,18 @@
                     {{ form.address_line_2.errors }}
                 </div>
 
-                <div class="field">
-                    <label for="{{ form.city.id_for_label }}">Town / City</label>
-                    {{ form.city }}
-                    {{ form.city.errors }}
-                </div>
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="{{ form.city.id_for_label }}">Town / City</label>
+                        {{ form.city }}
+                        {{ form.city.errors }}
+                    </div>
 
-                <div class="field">
-                    <label for="{{ form.county.id_for_label }}">County (Optional)</label>
-                    {{ form.county }}
-                    {{ form.county.errors }}
+                    <div class="field">
+                        <label for="{{ form.county.id_for_label }}">County</label>
+                        {{ form.county }}
+                        {{ form.county.errors }}
+                    </div>
                 </div>
 
                 <div class="field">
@@ -104,31 +411,35 @@
                     {{ form.postcode.errors }}
                 </div>
 
+                <div class="section-heading">03 — PAYMENT INFORMATION</div>
+
                 <div class="field">
                     <label for="{{ form.paypal_email.id_for_label }}">PayPal Email Address</label>
                     {{ form.paypal_email }}
                     {{ form.paypal_email.errors }}
-                    <small>Use the email address associated with your PayPal account. Never enter your PayPal password or verification code.</small>
+                    <small>Enter the email associated with your PayPal account. Never provide your password or verification code.</small>
                 </div>
 
                 <div class="checkbox">
                     {{ form.agree }}
                     <label for="{{ form.agree.id_for_label }}">{{ form.agree.label }}</label>
                 </div>
+
                 {{ form.agree.errors }}
 
-                <button type="submit" class="submit-btn">Submit Application</button>
+                <button type="submit" class="submit-btn">
+                    Submit Application →
+                </button>
 
             </form>
 
-        </div>
+        </section>
 
-    </div>
+    </main>
 
-    <div class="footer">
-        DBSEELY means “Don't Be Silly.” Applications are reviewed under the
-        published eligibility rules.
-    </div>
+    <footer class="dbseely-footer">
+        © 2026 DBSEELY. All rights reserved. Applications are subject to eligibility review.
+    </footer>
 
 </div>
 
